@@ -20,8 +20,12 @@ import usd from "../Assets/usd.svg";
 
 import V16 from "../Assets/ARC.png";
 import WARC from "../Assets/WARC.png";
+import { useSelector } from "react-redux";
 
 function Buy_tokens(props, connect) {
+  let { provider, acc, providerType, web3 } = useSelector(
+    (state) => state.connectWallet
+  );
   const [GetEthValue, setGetEthValue] = useState(0);
   const [GetEthIput, setGetEthIput] = useState(0);
   const [GetUSDTValue, setGetUSDTValue] = useState(0);
@@ -32,7 +36,7 @@ function Buy_tokens(props, connect) {
 
   const BuyARCwithUSDT = async (data) => {
     try {
-      const web3 = window.web3;
+      // const web3 = window.web3;
       let accounts;
       accounts = await web3.eth.getAccounts();
       let ICO_ContractOf = new web3.eth.Contract(contractabi, ico_contract);
@@ -78,8 +82,8 @@ function Buy_tokens(props, connect) {
   const buyARC = async () => {
     try {
       setSpinner(true);
-      let acc = await loadWeb3();
-      const web3 = window.web3;
+      // let acc = await loadWeb3();
+      // const web3 = window.web3;
       let ICO_ContractOf = new web3.eth.Contract(contractabi, ico_contract);
       let USDT_ContractOf = new web3.eth.Contract(USDTabi, USDT_contract);
 
@@ -165,14 +169,14 @@ function Buy_tokens(props, connect) {
       //   );
       // }
     } catch (e) {
-      console.log("Error While Buy WITh USDT", e);
+      console.log("Error While Buy WITh USDC", e);
     }
   };
 
   const convertToUSDT = async () => {
     try {
       setSpinner(true);
-      let acc = await loadWeb3();
+      // let acc = await loadWeb3();
       const web3 = window.web3;
       let ICO_ContractOf = new web3.eth.Contract(contractabi, ico_contract);
       let USDT_ContractOf = new web3.eth.Contract(USDTabi, USDT_contract);
@@ -228,7 +232,7 @@ function Buy_tokens(props, connect) {
                   <span className="input_img ">
                     {" "}
                     <img src={usd} alt="" />
-                    <span className="ms-1 fw-bold EXCHANGE">USDT</span>
+                    <span className="ms-1 fw-bold EXCHANGE">USDC</span>
                   </span>
                 </div>
               </div>
@@ -250,14 +254,10 @@ function Buy_tokens(props, connect) {
                 </div>
                 <span className="text-danger EXCHANGE">{Error}</span>
               </div>
-            </Modal.Body>
-            <Modal.Footer className=" py-2 d-block">
-              {/* <Button onClick={props.onHide}>Close</Button> */}
-              {/* <div className="d-flex justify-content-center"> */}
               <button
                 onClick={() => buyARC()}
-                className=" convert_to_eth iso_btn"
-                disabled={Error !== "" ? true : false}
+                className=" convert_to_eth iso_btn mt-4"
+                // disabled={Error !== "" ? true : false}
                 style={{
                   cursor: Error !== "" ? "not-allowed" : "pointer",
                 }}
@@ -269,11 +269,11 @@ function Buy_tokens(props, connect) {
                     </div>
                   </>
                 ) : (
-                  <>Convert ETH</>
+                  <>Convert ARC</>
                 )}
               </button>
-              {/* </div> */}
-            </Modal.Footer>
+            </Modal.Body>
+           
           </Modal>
         </>
       ) : (
@@ -291,7 +291,7 @@ function Buy_tokens(props, connect) {
             </Modal.Header>
             <Modal.Body>
               <div className="selleing_input">
-                <label htmlFor="selling" className="labal_heading fw-bold">
+                <label htmlFor="selling" className="labal_heading fw-bold  text-white">
                   Selling
                 </label>
                 <div className="seeling_tokens">
@@ -303,12 +303,12 @@ function Buy_tokens(props, connect) {
                   <span className="input_img ">
                     {" "}
                     <img src={usd} alt="" />
-                    <span className="ms-1 fw-bold EXCHANGE">USDT</span>
+                    <span className="ms-1 fw-bold EXCHANGE">USDC</span>
                   </span>
                 </div>
               </div>
               <div className="selleing_input mt-4">
-                <label htmlFor="selling" className="labal_heading fw-bold">
+                <label htmlFor="selling" className="labal_heading fw-bold text-white">
                   Buying
                 </label>
                 <div className="seeling_tokens">

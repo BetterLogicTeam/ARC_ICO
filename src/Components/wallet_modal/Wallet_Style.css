@@ -1,0 +1,109 @@
+
+
+.gap-3 {
+    gap: 1rem!important;
+}
+.justify-content-around {
+    justify-content: space-around!important;
+}
+.d-flex {
+    display: flex!important;
+}
+.walletBtn {
+    border: 2px solid #fff !important;
+    border-radius: 15px;
+    width: 196px;
+    height: 205px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+
+    box-shadow: 0 0 10px #9ecaed;
+    /* box-shadow: -3.828px -3.828px 6px 0px #d2b973, 3px 5px 8px 0px #61330e; */
+    background: linear-gradient(90deg, #6E3187 0%, #b671d1 100%) !important;
+}
+.cursor-pointer {
+    cursor: pointer!important;
+}
+.mb-3 {
+    margin-bottom: 1rem!important;
+}
+img, svg {
+    vertical-align: middle;
+}
+.bold-text {
+    font-family: 'Mina', sans-serif !important;
+
+}
+.text-uppercase {
+    text-transform: uppercase!important;
+}
+.fs-5 {
+    font-size: 1.125rem!important;
+}
+.d-block {
+    display: block!important;
+}
+ .headermodealdiv {
+    /* background-image: linear-gradient(to bottom, #000000, #6c3086); */
+    /* box-shadow: -3.828px -3.828px 6px 0px #d2b973, 3px 5px 8px 0px #61330e; */
+    box-shadow: 0 0 10px #9ecaed !important;
+
+   
+    color: #fff;
+    /* padding: 20px; */
+    font-weight: bold !important;
+    display: flex;
+    justify-content: center !important;
+}
+.text-center {
+    text-align: center!important;
+}
+.headerdiv{
+    text-align: center !important;
+    font-family: 'Mina', sans-serif !important;
+    font-weight: 700 !important;
+
+    /* border: 1px solid red; */
+}
+.walletBtn span{
+    font-weight: 700 !important;
+}
+.modal-content {
+ 
+    border: 1px solid rgb(255 255 255 / 79%);
+    background-image: linear-gradient(to bottom, #000000, #6c3086) !important;
+    /* background: linear-gradient(0deg, #0a0907 40%, #c0c4c4 110%) !important; */
+    background-size: cover;
+    /* background-color: #500a47; */
+    margin: 5% auto 15% auto;
+    border: 1px solid #fff !important;
+    width: 100% !important;
+    z-index: 100 !important;
+}
+
+/* .modal-content::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #ffff !important;
+    opacity: 0 !important;
+    
+} */
+.modal-backdrop.show {
+    /* opacity: -1.5 !important; */
+}
+/* .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0 !important;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+} */

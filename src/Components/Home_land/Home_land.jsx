@@ -40,6 +40,9 @@ function Home_land() {
   const [usdt, setUSDT] = useState("--");
   const [ETH, setETH] = useState("--");
   const [TokenPercentce, setTokenPercent] = useState("--");
+
+
+
   const [contset, setcontset] = useState(false);
   const [modalShow5, setModalShow5] = useState(false);
   const [BtTxt, setBtTxt] = useState("Connect");
@@ -85,7 +88,7 @@ function Home_land() {
           console.log(err);
         } else {
           setBalanceEth(web3.utils.fromWei(result, "ether"));
-          let tokenpercentag = (web3.utils.fromWei(result, "ether") / 500) * 100;
+          let tokenpercentag = (web3.utils.fromWei(result, "ether") / 833300000) * 100;
 
           // console.log("BalanceEth", typeof tokenpercentag);
 
@@ -196,8 +199,7 @@ function Home_land() {
               <p className="home_land_para text-white">
                 Buy ARC and WARC With USDC token at a very discounted price in
                 the Presale. Swap USDC for ARC and WARC without any fees at the
-                lowest price. During the Presale ARC and WARC is available for
-                only 1 USDC compared to the public sale for 1.53 USDC.
+                lowest price. During the Presale the conversion rate is 8333 ARC per USDC .
               </p>
               {/* <img src={dog} alt=""  className="dog_img" /> */}
               {/* <button  className="btn btn-success" onClick={()=>connectWallet()}>Connect </button> */}
@@ -222,7 +224,7 @@ function Home_land() {
                   />
                 </div>
                 <div className="progress_bar_nav mt-3">
-                  <h4 className="progress_number">{TokenPercentce}% SOLD</h4>
+                  <h4 className="progress_number">{(TokenPercentce)}% SOLD</h4>
                   <div className="lower_pro d-flex">
                     <div
                       className="upper_pro"

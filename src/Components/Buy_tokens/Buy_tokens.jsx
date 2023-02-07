@@ -43,25 +43,46 @@ function Buy_tokens(props, connect) {
       let TokenContractOf = new web3.eth.Contract(USDTabi, USDT_contract);
 
       let value = web3.utils.toWei(data.toString());
-      let getValue = await ICO_ContractOf.methods.getARCvalue(value).call();
+      let getValue = await ICO_ContractOf.methods
+        .getARCvalue(value.toString())
+        .call();
       setGetEthIput(data);
       value = web3.utils.fromWei(getValue.toString());
 
       let BalanceOf = await TokenContractOf.methods
         .balanceOf(ico_contract)
         .call();
+
+      let User_Token_Balance = await TokenContractOf.methods
+        .balanceOf(acc)
+        .call();
       BalanceOf = web3.utils.fromWei(BalanceOf.toString());
 
-      // web3.eth.getBalance(accounts.toString(), function(err, result) {
-      //   if (err) {
-      //     console.log(err)
-      //   } else {
+      web3.eth.getBalance(ico_contract.toString(), function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          setBalanceEth(web3.utils.fromWei(result, "ether"));
+          setGetEthValue(value);
 
-      //     setBalanceEth(web3.utils.fromWei(result, "ether"))
-      //   }
-      // })
+          if (User_Token_Balance < Number(data)) {
+            setError(
+              "Oops! It looks like you don't have enough USDC. Please reduce the amount of USDC and try again."
+            );
+            setGetEthValue(value);
+          } else if (web3.utils.fromWei(result, "ether") < value) {
+            setError(
+              "Oops! It looks like contract don't have enough ARC. Please reduce the amount of USDC and try again."
+            );
+            setGetEthValue(value);
+          } else {
+            setGetEthValue(value);
+            setError("");
+          }
+        }
+      });
+      console.log("data", BalanceEth);
 
-      setGetEthValue(value);
       // if (BalanceOf > value) {
       //   setError("Oops! It looks like contract don't have enough Token to pay for that transaction. Please reduce the amount of ETH and try again.")
       // } else if(BalanceEth < data) {
@@ -91,13 +112,11 @@ function Buy_tokens(props, connect) {
 
       await USDT_ContractOf.methods.approve(ico_contract,value).send({
         from: acc,
-      
+
       });
       toast.success("Approved Successfully! 🎉");
-
       await ICO_ContractOf.methods.BuyARCWithUSDT(value).send({
         from: acc,
-   
       });
       toast.success("Purchase Successful! 🎉");
       setSpinner(false);
@@ -113,8 +132,7 @@ function Buy_tokens(props, connect) {
       let ICO_ContractOf = new web3.eth.Contract(contractabi, ico_contract);
       let TokenContractOf = new web3.eth.Contract(WARC_ABI, WARC_Contract);
       let USDTContractOf = new web3.eth.Contract(USDTabi, USDT_contract);
-      
-      
+
       let value = web3.utils.toWei(data.toString());
       let getValue = await ICO_ContractOf.methods.getWARCvalue(value).call();
       setGetEthIput(data);
@@ -125,12 +143,6 @@ function Buy_tokens(props, connect) {
         .call();
       BalanceOf = web3.utils.fromWei(BalanceOf.toString());
 
-      
-      
-      
-      
-      
-      
       // let accounts;
       // accounts = await web3.eth.getAccounts();
 
@@ -183,17 +195,14 @@ function Buy_tokens(props, connect) {
 
       let value = web3.utils.toWei(GetEthIput.toString());
 
-      await USDT_ContractOf.methods.approve(ico_contract,value).send({
+      await USDT_ContractOf.methods.approve(ico_contract, value).send({
         from: acc,
-      
       });
       toast.success("Approved Successfully! 🎉");
       await ICO_ContractOf.methods.BuyWARCWithUSDT(value).send({
         from: acc,
-   
       });
 
-    
       setSpinner(false);
       toast.success("Purchase Successful! 🎉");
     } catch (e) {
@@ -273,7 +282,6 @@ function Buy_tokens(props, connect) {
                 )}
               </button>
             </Modal.Body>
-           
           </Modal>
         </>
       ) : (
@@ -291,7 +299,10 @@ function Buy_tokens(props, connect) {
             </Modal.Header>
             <Modal.Body>
               <div className="selleing_input">
-                <label htmlFor="selling" className="labal_heading fw-bold  text-white">
+                <label
+                  htmlFor="selling"
+                  className="labal_heading fw-bold  text-white"
+                >
                   Selling
                 </label>
                 <div className="seeling_tokens">
@@ -308,7 +319,10 @@ function Buy_tokens(props, connect) {
                 </div>
               </div>
               <div className="selleing_input mt-4">
-                <label htmlFor="selling" className="labal_heading fw-bold text-white">
+                <label
+                  htmlFor="selling"
+                  className="labal_heading fw-bold text-white"
+                >
                   Buying
                 </label>
                 <div className="seeling_tokens">

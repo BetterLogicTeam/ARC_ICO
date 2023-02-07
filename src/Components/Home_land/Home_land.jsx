@@ -47,6 +47,7 @@ function Home_land() {
     text: "Buy WARC",
     btnColor: "linear-gradient(90deg, #6E3187 0%, #b671d1 100%) ",
   });
+  const [BalanceEth, setBalanceEth] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -62,13 +63,12 @@ function Home_land() {
       // toast.error('Wrong Network')
       setBtTxt("Wrong Network");
     } else {
-      
       let myAcc =
         acc?.substring(0, 4) + "..." + acc?.substring(acc?.length - 4);
 
       setBtTxt(myAcc);
       setcontset(true);
-     
+
       let ICOContractOf = new web3.eth.Contract(contractabi, ico_contract);
       let USTContractOf = new web3.eth.Contract(USDTabi, USDT_contract);
       let tokenContractOf = new web3.eth.Contract(WARC_ABI, WARC_Contract);
@@ -76,27 +76,39 @@ function Home_land() {
       let getUSDTValue = await USTContractOf.methods
         .balanceOf(ico_contract)
         .call();
-      let gettokenValue = await tokenContractOf.methods
+      let gettokenValue = await USTContractOf.methods
         .balanceOf(ico_contract)
         .call();
 
-      let USDTvalue = (getUSDTValue / 1000000).toString();
+      web3.eth.getBalance(ico_contract.toString(), function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          setBalanceEth(web3.utils.fromWei(result, "ether"));
+          let tokenpercentag = (web3.utils.fromWei(result, "ether") / 100) * 100;
+
+          // console.log("BalanceEth", typeof tokenpercentag);
+
+          let tokenpercentag1 = 100.0 - tokenpercentag;
+          setTokenPercent(tokenpercentag1);
+        }
+      });
+
+      // let USDTvalue = (getUSDTValue / 1000000).toString();
+      let USDTvalue = web3.utils.fromWei(getUSDTValue);
       USDTvalue = parseFloat(USDTvalue).toFixed(2);
       let tokenvalue = web3.utils.fromWei(gettokenValue);
-      let tokenpercentag = (tokenvalue / 200000000) * 100;
-      let tokenpercentag1 = 100 - tokenpercentag;
-      tokenpercentag1 = parseFloat(tokenpercentag1).toFixed(2);
+
+      // tokenpercentag1 = parseFloat(tokenpercentag1).toFixed(2);
 
       setUSDT(USDTvalue);
-      console.log(USDTvalue, "USDTValue");
+      // console.log(USDTvalue, "USDTValue");
 
       let ETHBalance = await web3.eth.getBalance(ico_contract.toString());
       let ETHValue = web3.utils.fromWei(ETHBalance);
       ETHValue = parseFloat(ETHValue).toFixed(2);
-      console.log(ETHValue, "ETHBalance");
+      // console.log(ETHValue, "ETHBalance");
       setETH(ETHValue);
-
-      setTokenPercent(tokenpercentag1);
     }
   };
 
@@ -146,8 +158,8 @@ function Home_land() {
     } else {
       return (
         <div className="text_days fs-5 ">
-           {days}  Days {hours} Hours {minutes} Minutes  {seconds} Seconds remaining until presale ends
-                   
+          {days} Days {hours} Hours {minutes} Minutes {seconds} Seconds
+          remaining until presale ends
           {/* {days} D {hours} H {minutes} M {seconds} S */}
         </div>
       );
@@ -202,11 +214,9 @@ function Home_land() {
               <div className="right_content_card">
                 <h4 className="card_heading_span pt-3">Presale ending soon</h4>
                 <div className="text_days fs-5 ">
-                  
                   <Countdown
                     date={
-                      Date.now() +
-                      (parseInt("1675642945") * 1000 - Date.now())
+                      Date.now() + (parseInt("1677671622") * 1000 - Date.now())
                     }
                     renderer={renderer}
                   />

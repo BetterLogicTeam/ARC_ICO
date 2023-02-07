@@ -85,7 +85,7 @@ function Home_land() {
           console.log(err);
         } else {
           setBalanceEth(web3.utils.fromWei(result, "ether"));
-          let tokenpercentag = (web3.utils.fromWei(result, "ether") / 100) * 100;
+          let tokenpercentag = (web3.utils.fromWei(result, "ether") / 500) * 100;
 
           // console.log("BalanceEth", typeof tokenpercentag);
 

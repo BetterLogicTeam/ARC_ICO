@@ -34,7 +34,7 @@ function Buy_tokens(props, connect) {
   const [Error, setError] = useState("");
   const [BalanceEth, setBalanceEth] = useState(0);
 
-  const BuyARCwithUSDT = async (data) => {
+  const BuyARCWithUSDC = async (data) => {
     try {
       // const web3 = window.web3;
       let accounts;
@@ -115,7 +115,7 @@ function Buy_tokens(props, connect) {
 
       });
       toast.success("Approved Successfully! 🎉");
-      await ICO_ContractOf.methods.BuyARCWithUSDT(value).send({
+      await ICO_ContractOf.methods.BuyARCWithUSDC(value).send({
         from: acc,
       });
       toast.success("Purchase Successful! 🎉");
@@ -236,7 +236,7 @@ function Buy_tokens(props, connect) {
                   <input
                     type="text"
                     className="selling_input"
-                    onChange={(e) => BuyARCwithUSDT(e.target.value)}
+                    onChange={(e) => BuyARCWithUSDC(e.target.value)}
                   />
                   <span className="input_img ">
                     {" "}

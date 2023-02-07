@@ -3,15 +3,15 @@ let isItConnected = false;
 const networks = {
   bsc: {
    
-    chainId: `0x${Number(97).toString(16)}`, // 97
-    chainName: "BNB Smart Chain Testnet",
+    chainId: `0x${Number(1244).toString(16)}`, // archie testnet
+    chainName: "Archie Testnet",
     nativeCurrency: {
-      name: "tBNB",
-      symbol: "tBNB",
+      name: "ARC",
+      symbol: "ARC",
       decimals: 18,
     },
-    rpcUrls: ["https://data-seed-prebsc-1-s3.binance.org:8545/"],
-    blockExplorerUrls: ["https://testnet.bscscan.com/"],
+    rpcUrls: ["https://rpc-test-1.archiechain.io"],
+    blockExplorerUrls: ["https://testnet.archiescan.io/"],
   },
 };
 const changeNetwork = async ({ networkName }) => {
@@ -20,7 +20,7 @@ const changeNetwork = async ({ networkName }) => {
     const web3 = window.web3;
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: web3.utils.toHex(97) }]
+      params: [{ chainId: web3.utils.toHex(1244) }]
     });
     window.location.reload();
 
@@ -57,7 +57,7 @@ export const loadWeb3 = async () => {
       await window.web3.eth.getChainId((err, netId) => {
         // console.log("networkId==>", netId);
         switch (netId.toString()) {
-          case "97":
+          case "1244":
             isItConnected = true;
             break;
           default:

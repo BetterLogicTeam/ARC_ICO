@@ -63,14 +63,16 @@ function Buy_tokens(props, connect) {
           console.log(err);
         } else {
           setBalanceEth(web3.utils.fromWei(result, "ether"));
-          setGetEthValue(value);
+          console.log("data", web3.utils.fromWei(result, "ether"));
 
+          setGetEthValue(value);
+          console.log(value);
           if (User_Token_Balance < Number(data)) {
             setError(
               "Oops! It looks like you don't have enough USDC. Please reduce the amount of USDC and try again."
             );
             setGetEthValue(value);
-          } else if (web3.utils.fromWei(result, "ether") < value) {
+          } else if (web3.utils.fromWei(result, "ether") < Number(value)) {
             setError(
               "Oops! It looks like contract don't have enough ARC. Please reduce the amount of USDC and try again."
             );
@@ -81,7 +83,6 @@ function Buy_tokens(props, connect) {
           }
         }
       });
-      console.log("data", BalanceEth);
 
       // if (BalanceOf > value) {
       //   setError("Oops! It looks like contract don't have enough Token to pay for that transaction. Please reduce the amount of ETH and try again.")
@@ -110,9 +111,8 @@ function Buy_tokens(props, connect) {
 
       let value = web3.utils.toWei(GetEthIput.toString());
 
-      await USDT_ContractOf.methods.approve(ico_contract,value).send({
+      await USDT_ContractOf.methods.approve(ico_contract, value).send({
         from: acc,
-
       });
       toast.success("Approved Successfully! 🎉");
       await ICO_ContractOf.methods.BuyARCWithUSDC(value).send({

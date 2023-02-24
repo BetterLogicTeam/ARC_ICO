@@ -93,7 +93,7 @@ function Home_land() {
           // console.log("BalanceEth", typeof tokenpercentag);
 
           let tokenpercentag1 = 100.0 - tokenpercentag;
-          setTokenPercent(tokenpercentag1);
+          setTokenPercent(parseFloat(tokenpercentag1).toFixed(2));
         }
       });
 

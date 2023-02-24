@@ -59,7 +59,8 @@
     border-radius: 1rem;
     border-top: 3px;
     border-style: solid;
-    border-color: #c7bef3;
+    border-color:     #b311f3 !important
+    ;
     box-shadow: 0 0 10px #9ecaed;
 }
 
